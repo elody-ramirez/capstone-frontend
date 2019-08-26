@@ -12,8 +12,9 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 // import Home from '../Home/Home'
 // Post Components
-import Posts from '../Posts/Posts'
 import Post from '../Posts/Post'
+import Posts from '../Posts/Posts'
+import CreatePost from '../Posts/CreatePost'
 
 // Comment Compoenents
 
@@ -68,6 +69,10 @@ class App extends Component {
           )} />
           <Route user={user} exact path='/posts/:id' render={() => (
             <Post alert={this.alert} user={user} />
+          )} />
+
+          <AuthenticatedRoute user={user} exact path='/createpost' render={() => (
+            <CreatePost alert={this.alert} user={user} />
           )} />
 
         </main>
