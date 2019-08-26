@@ -37,7 +37,7 @@ class Post extends Component {
             <h1>{post.title}</h1>
             <h2>{post.text}</h2>
             {(this.props.user && post) && this.props.user._id === post.owner
-              ? <Button href={`#posts/${post._id}/updatepost`}>Update Post</Button>
+              ? <Button href={`#posts/${post._id}/edit`}>Update Post</Button>
               : ''
             }
           </Fragment>

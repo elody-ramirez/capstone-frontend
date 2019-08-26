@@ -15,6 +15,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Post from '../Posts/Post'
 import Posts from '../Posts/Posts'
 import CreatePost from '../Posts/CreatePost'
+import UpdatePost from '../Posts/UpdatePost'
 
 // Comment Compoenents
 
@@ -70,10 +71,16 @@ class App extends Component {
           <Route user={user} exact path='/posts/:id' render={() => (
             <Post alert={this.alert} user={user} />
           )} />
-
-          <AuthenticatedRoute user={user} exact path='/createpost' render={() => (
-            <CreatePost alert={this.alert} user={user} />
-          )} />
+          <AuthenticatedRoute user={user} exact path='/createpost'
+            render={() => (
+              <CreatePost alert={this.alert} user={user} />
+            )}
+          />
+          <AuthenticatedRoute user={user} exact path='/posts/:id/edit'
+            render={() => (
+              <UpdatePost alert={this.alert} user={user} />
+            )}
+          />
 
         </main>
       </Fragment>
