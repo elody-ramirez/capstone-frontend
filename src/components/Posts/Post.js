@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 
@@ -10,7 +10,8 @@ class Post extends Component {
     super()
 
     this.state = {
-      post: null
+      post: null,
+      deleted: false
     }
   }
 
@@ -27,22 +28,57 @@ class Post extends Component {
     }
   }
 
-  render () {
-    const { post } = this.state
+  deletePost = () => {
+    axios({
+      method: 'DELETE',
+      url: `${apiUrl}/posts/${this.props.match.params.id}`,
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      }
+    })
+      .then(() => this.setState({ deleted: true }))
+      .catch(console.error)
+  }
 
-    return (
+  render () {
+    const { post, deleted } = this.state
+    let postJsx
+    let updateAndDelete
+
+    if (deleted) {
+      return <Redirect to={
+        {
+          pathname: '/posts'
+        }
+      }/>
+    } else if (post) {
+      updateAndDelete =
+      <Fragment>
+        <Button href={`#posts/${post._id}/edit`}>Update This Post</Button>
+        <Button onClick={this.deletePost}>Delete This Post</Button>
+      </Fragment>
+
+      postJsx =
       <div>
         { post && (
           <Fragment>
             <h1>{post.title}</h1>
             <h2>{post.text}</h2>
             {(this.props.user && post) && this.props.user._id === post.owner
-              ? <Button href={`#posts/${post._id}/edit`}>Update Post</Button>
+              ? updateAndDelete
               : ''
             }
           </Fragment>
         )}
       </div>
+    } else {
+      postJsx = (
+        'Loading....'
+      )
+    }
+
+    return (
+      <div>{postJsx}</div>
     )
   }
 }
