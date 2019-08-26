@@ -4,10 +4,16 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
+// User Components
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+
+// import Home from '../Home/Home'
+// Post Components
+import Posts from '../Posts/Posts'
+// Comment Compoenents
 
 class App extends Component {
   constructor () {
@@ -53,6 +59,10 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+
+          <Route user={user} path='/posts' render={() => (
+            <Posts alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>
