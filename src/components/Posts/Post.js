@@ -48,7 +48,7 @@ class Post extends Component {
     if (deleted) {
       return <Redirect to={
         {
-          pathname: '/posts'
+          pathname: '/'
         }
       }/>
     } else if (post) {
