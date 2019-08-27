@@ -20,6 +20,7 @@ const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#/createpost">Create a Post</Nav.Link>
+    <Nav.Link href="#/createcomment">Create a Comment</Nav.Link>
   </Fragment>
 )
 

@@ -18,6 +18,7 @@ import CreatePost from '../Posts/CreatePost'
 import UpdatePost from '../Posts/UpdatePost'
 
 // Comment Compoenents
+import CreateComment from '../Comments/CreateComment'
 
 class App extends Component {
   constructor () {
@@ -65,6 +66,7 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
 
+          {/* Routes for posts */}
           <Route exact path='/' render={() => (
             <Posts alert={this.alert} user={user} />
           )} />
@@ -82,6 +84,12 @@ class App extends Component {
             )}
           />
 
+          {/* Routes for comments */}
+          <AuthenticatedRoute user={user} exact path='/createcomment'
+            render={() => (
+              <CreateComment alert={this.alert} user={user} />
+            )}
+          />
         </main>
       </Fragment>
     )
