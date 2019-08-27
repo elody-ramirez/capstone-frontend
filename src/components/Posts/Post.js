@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
+import Comments from '../Comments/Comments'
 
 import apiUrl from '../../apiConfig'
 
@@ -22,6 +23,7 @@ class Post extends Component {
 
       // do something with response
       console.log(response)
+      console.log(response.data.post.comments)
       this.setState({ post: response.data.post })
     } catch (error) {
       console.error(error)
@@ -42,6 +44,8 @@ class Post extends Component {
 
   render () {
     const { post, deleted } = this.state
+    const { user } = this.props
+
     let postJsx
     let updateAndDelete
 
@@ -68,6 +72,7 @@ class Post extends Component {
               ? updateAndDelete
               : ''
             }
+            <Comments user={user} alert={alert} post={post} />
           </Fragment>
         )}
       </div>

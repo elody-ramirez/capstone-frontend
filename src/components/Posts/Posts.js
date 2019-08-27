@@ -35,6 +35,7 @@ class Posts extends Component {
 
     return (
       <ListGroup>
+        {console.log(this.props.user)}
         {this.state.posts.length ? postsJsx : <ListGroup.Item> No Posts Found</ListGroup.Item>}
         { // this.state.posts.length && postsJsx}
         }
