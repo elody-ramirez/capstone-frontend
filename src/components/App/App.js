@@ -12,7 +12,11 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 // import Home from '../Home/Home'
 // Post Components
+import Post from '../Posts/Post'
 import Posts from '../Posts/Posts'
+import CreatePost from '../Posts/CreatePost'
+import UpdatePost from '../Posts/UpdatePost'
+
 // Comment Compoenents
 
 class App extends Component {
@@ -61,9 +65,23 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
 
-          <Route user={user} path='/posts' render={() => (
+          <Route exact path='/' render={() => (
             <Posts alert={this.alert} user={user} />
           )} />
+          <Route user={user} exact path='/posts/:id' render={() => (
+            <Post alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/createpost'
+            render={() => (
+              <CreatePost alert={this.alert} user={user} />
+            )}
+          />
+          <AuthenticatedRoute user={user} exact path='/posts/:id/edit'
+            render={() => (
+              <UpdatePost alert={this.alert} user={user} />
+            )}
+          />
+
         </main>
       </Fragment>
     )
