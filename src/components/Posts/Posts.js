@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -19,7 +20,6 @@ class Posts extends Component {
       const response = await axios(`${apiUrl}/posts`)
 
       // do something with response
-      console.log(response)
       this.setState({ posts: response.data.posts })
     } catch (error) {
       console.error(error)
@@ -35,7 +35,6 @@ class Posts extends Component {
 
     return (
       <ListGroup>
-        {console.log(this.props.user)}
         {this.state.posts.length ? postsJsx : <ListGroup.Item> No Posts Found</ListGroup.Item>}
         { // this.state.posts.length && postsJsx}
         }
@@ -44,4 +43,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+export default withRouter(Posts)

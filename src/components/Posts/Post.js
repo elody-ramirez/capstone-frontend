@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
-import Comments from '../Comments/Comments'
 
+import Comments from '../Comments/Comments'
 import apiUrl from '../../apiConfig'
 
 class Post extends Component {
@@ -22,8 +22,6 @@ class Post extends Component {
       const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
 
       // do something with response
-      console.log(response)
-      console.log(response.data.post.comments)
       this.setState({ post: response.data.post })
     } catch (error) {
       console.error(error)

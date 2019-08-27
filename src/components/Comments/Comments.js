@@ -1,45 +1,68 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import { withRouter, Redirect } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
-import Button from 'react-bootstrap/Button'
+import axios from 'axios'
+
+import Comment from './Comment'
+import apiUrl from '../../apiConfig'
 
 class Comments extends Component {
   constructor (props) {
     super(props)
 
+    console.log(this.props)
     this.state = {
-      comments: this.props.post.comments
+      deleted: false
     }
   }
 
+  handleDelete = (id) => {
+    console.log(id)
+    axios({
+      method: 'DELETE',
+      url: `${apiUrl}/comments/${id}`,
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      }
+    })
+      .then(this.setState({ deleted: true }))
+      .catch(console.error)
+  }
+
   render () {
+    const { user, post } = this.props
+    const { deleted } = this.state
+    const comments = post.comments
+
     let commentsJsx
-    let updateAndDelete
 
-    if (this.state.comments.length) {
-      updateAndDelete =
-      <Fragment>
-        <Button onClick={this.deletePost}>Delete This Comment</Button>
-      </Fragment>
-
-      commentsJsx = this.state.comments.map(comment => (
-        <ListGroup.Item as="a" href={`#/comments/${comment._id}`} key={comment._id}>
-          {comment.text}
-          {(this.props.user) && this.props.user._id === comment.owner
-            ? updateAndDelete
-            : ''
-          }
+    if (deleted) {
+      console.log(this.props.match.params.id)
+      return <Redirect to={
+        {
+          pathname: `/posts/${this.props.match.params.id}`
+        }
+      }/>
+    } else if (comments) {
+      commentsJsx = comments.map(comment => (
+        <ListGroup.Item key={comment._id}>
+          <Comment
+            user={user} alert={alert} comment={comment} post={post} handleDelete={this.handleDelete}
+          />
         </ListGroup.Item>
       ))
+    } else {
+      commentsJsx = 'No Comments, Be The First'
     }
 
     return (
       <ListGroup>
-        {this.state.comments.length ? commentsJsx : <ListGroup.Item> No Comments Found</ListGroup.Item>}
-        { // this.state.comments.length && commentsJsx}
-        }
+        <ListGroup.Item>
+          {commentsJsx}
+        </ListGroup.Item>
       </ListGroup>
     )
   }
 }
 
-export default Comments
+export default withRouter(Comments)
