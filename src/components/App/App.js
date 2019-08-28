@@ -1,16 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
+import AuthenticatedRoute from '../User/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
-import Header from '../Header/Header'
+import Header from '../Common/Header'
 // User Components
-import SignUp from '../SignUp/SignUp'
-import SignIn from '../SignIn/SignIn'
-import SignOut from '../SignOut/SignOut'
-import ChangePassword from '../ChangePassword/ChangePassword'
+import SignUp from '../User/SignUp'
+import SignIn from '../User/SignIn'
+import SignOut from '../User/SignOut'
+import ChangePassword from '../User/ChangePassword'
 
-// import Home from '../Home/Home'
 // Post Components
 import Post from '../Posts/Post'
 import Posts from '../Posts/Posts'
@@ -32,7 +31,6 @@ class App extends Component {
   clearUser = () => this.setState({ user: null })
 
   alert = ({ heading, message, variant }) => {
-    console.log('this the message in the alert function', message)
     this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
   }
 
