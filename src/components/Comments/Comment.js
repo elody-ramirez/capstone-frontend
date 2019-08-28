@@ -2,7 +2,8 @@ import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-const Comment = ({ comment, user, handleEdit, handleDelete }) => (
+const Comment = ({ comment, user, handleEdit, handleDelete }) => {
+  const commentJsx =
   <Fragment>
     <p>{comment.text}</p>
     <p>Created by:{comment.owner.username}</p>
@@ -14,6 +15,8 @@ const Comment = ({ comment, user, handleEdit, handleDelete }) => (
       </Fragment>
       : ''}
   </Fragment>
-)
+
+  return commentJsx
+}
 
 export default withRouter(Comment)

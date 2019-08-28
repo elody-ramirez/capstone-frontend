@@ -9,7 +9,7 @@ class CreateComment extends Component {
   state = {
     comment: {
       text: '',
-      post: '5d6548bf5b542c0d046a4170'
+      post: this.props.post._id
     }
   }
 
@@ -20,6 +20,7 @@ class CreateComment extends Component {
   }
 
   handleSubmit = event => {
+    console.log(this.props.post._id)
     event.preventDefault()
     axios({
       method: 'POST',
@@ -32,12 +33,7 @@ class CreateComment extends Component {
       }
     })
       .then(response => {
-        this.props.alert({
-          heading: 'Success!!!!!!',
-          message: 'You created a comment.',
-          variant: 'success'
-        })
-        this.props.history.push('/posts/5d6548bf5b542c0d046a4170')
+        this.props.onCreate(response)
       })
       .catch(console.error)
   }

@@ -4,6 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import axios from 'axios'
 
 import Comment from './Comment'
+import CreateComment from './CreateComment'
 import apiUrl from '../../apiConfig'
 
 class Comments extends Component {
@@ -12,6 +13,14 @@ class Comments extends Component {
 
     this.state = {
     }
+  }
+
+  showForm = () => {
+
+  }
+
+  onCreate = () => {
+    this.props.updatePostState()
   }
 
   handleDelete = (id) => {
@@ -30,6 +39,7 @@ class Comments extends Component {
     const { user, post } = this.props
     const comments = post.comments
 
+    console.log({ alert })
     let commentsJsx
 
     if (comments) {
@@ -46,6 +56,14 @@ class Comments extends Component {
 
     return (
       <ListGroup>
+        { user &&
+          <CreateComment
+            user={user}
+            post={post}
+            alert={alert}
+            onCreate={this.onCreate}
+          />
+        }
         <ListGroup.Item>
           {commentsJsx}
         </ListGroup.Item>

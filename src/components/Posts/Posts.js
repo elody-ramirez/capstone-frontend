@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -38,7 +38,9 @@ class Posts extends Component {
       <Fragment>
         <div className="container text-right my-2">
           { user &&
-              <button href="#/post-create" className="btn btn-primary">Create a Post</button>
+            <Link to='/createpost'>
+              <button className="btn btn-primary">Create a Post</button>
+            </Link>
           }
         </div>
         <ListGroup>

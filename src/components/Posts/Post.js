@@ -93,8 +93,6 @@ class Post extends Component {
           <Fragment>
             <h1>{post.title}</h1>
             <h2>{post.text}</h2>
-            {console.log('this is user', this.props.user)}
-            {console.log('this is post', post.owner)}
             {(this.props.user && post) && this.props.user._id === post.owner._id
               ? updateAndDelete
               : ''
