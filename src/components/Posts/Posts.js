@@ -30,7 +30,10 @@ class Posts extends Component {
     const { user } = this.props
     const postsJsx = this.state.posts.map(post => (
       <ListGroup.Item as="a" href={`#/posts/${post._id}`} key={post._id}>
-        {post.title}
+        {console.log(post.owner.username)}
+        <h3>{post.title}</h3>
+        <p>created by: {post.owner.username}</p>
+        <p>comment count: {post.comments.length}</p>
       </ListGroup.Item>
     ))
 

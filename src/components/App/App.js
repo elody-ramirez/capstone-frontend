@@ -17,9 +17,6 @@ import Posts from '../Posts/Posts'
 import CreatePost from '../Posts/CreatePost'
 import UpdatePost from '../Posts/UpdatePost'
 
-// Comment Compoenents
-import CreateComment from '../Comments/CreateComment'
-
 class App extends Component {
   constructor () {
     super()
@@ -35,6 +32,7 @@ class App extends Component {
   clearUser = () => this.setState({ user: null })
 
   alert = ({ heading, message, variant }) => {
+    console.log('this the message in the alert function', message)
     this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
   }
 
@@ -84,12 +82,6 @@ class App extends Component {
             )}
           />
 
-          {/* Routes for comments */}
-          <AuthenticatedRoute user={user} exact path='/createcomment'
-            render={() => (
-              <CreateComment alert={this.alert} user={user} />
-            )}
-          />
         </main>
       </Fragment>
     )

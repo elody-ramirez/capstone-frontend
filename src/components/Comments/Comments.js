@@ -15,10 +15,6 @@ class Comments extends Component {
     }
   }
 
-  showForm = () => {
-
-  }
-
   onCreate = () => {
     this.props.updatePostState()
   }
@@ -31,18 +27,24 @@ class Comments extends Component {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
-      .then(this.props.updatePostState)
+      .then(response => {
+        this.props.alert({
+          heading: 'Success!!!!!!',
+          message: 'You deleted a comment.',
+          variant: 'success'
+        })
+        this.props.updatePostState('deleted')
+      })
       .catch(console.error)
   }
 
   render () {
-    const { user, post } = this.props
+    const { user, post, alert } = this.props
     const comments = post.comments
 
-    console.log({ alert })
     let commentsJsx
 
-    if (comments) {
+    if (comments.length !== 0) {
       commentsJsx = comments.map(comment => (
         <ListGroup.Item key={comment._id}>
           <Comment
@@ -57,12 +59,15 @@ class Comments extends Component {
     return (
       <ListGroup>
         { user &&
-          <CreateComment
-            user={user}
-            post={post}
-            alert={alert}
-            onCreate={this.onCreate}
-          />
+          <ListGroup.Item>
+            <h2>Create a Comment here</h2>
+            <CreateComment
+              user={user}
+              post={post}
+              alert={alert}
+              onCreate={this.onCreate}
+            />
+          </ListGroup.Item>
         }
         <ListGroup.Item>
           {commentsJsx}

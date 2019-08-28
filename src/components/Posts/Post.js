@@ -22,8 +22,6 @@ class Post extends Component {
   async componentDidMount () {
     try {
       // await the response from API call
-      console.log('this is props', this.props)
-      console.log('this is state', this.state)
       const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
 
       // do something with response
@@ -68,7 +66,7 @@ class Post extends Component {
 
   render () {
     const { post, deleted } = this.state
-    const { user } = this.props
+    const { user, alert } = this.props
 
     let postJsx
     let updateAndDelete
@@ -80,7 +78,6 @@ class Post extends Component {
         }
       }/>
     } else if (post) {
-      console.log(this.state)
       updateAndDelete =
       <Fragment>
         <Button href={`#posts/${post._id}/edit`}>Update This Post</Button>
@@ -92,7 +89,8 @@ class Post extends Component {
         { post && (
           <Fragment>
             <h1>{post.title}</h1>
-            <h2>{post.text}</h2>
+            <p>created by: {post.owner.username}</p>
+            <h3>{post.text}</h3>
             {(this.props.user && post) && this.props.user._id === post.owner._id
               ? updateAndDelete
               : ''

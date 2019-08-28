@@ -47,7 +47,6 @@ class UpdatePost extends Component {
           message: 'You updated a post.',
           variant: 'success'
         })
-        console.log('this is', response)
         this.props.history.push(`/posts/${this.state.post._id}`)
       })
       .catch(console.error)

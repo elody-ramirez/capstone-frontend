@@ -20,7 +20,6 @@ class CreateComment extends Component {
   }
 
   handleSubmit = event => {
-    console.log(this.props.post._id)
     event.preventDefault()
     axios({
       method: 'POST',
@@ -33,6 +32,11 @@ class CreateComment extends Component {
       }
     })
       .then(response => {
+        this.props.alert({
+          heading: 'Success!!!!!!',
+          message: 'You created a comment.',
+          variant: 'success'
+        })
         this.props.onCreate(response)
       })
       .catch(console.error)
