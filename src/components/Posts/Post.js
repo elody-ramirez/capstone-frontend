@@ -12,19 +12,38 @@ class Post extends Component {
 
     this.state = {
       post: null,
-      deleted: false
+      deleted: false,
+      changedComments: false
     }
   }
+
+  updatePostState = () => this.setState({ changedComments: true })
 
   async componentDidMount () {
     try {
       // await the response from API call
+      console.log('this is props', this.props)
+      console.log('this is state', this.state)
       const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
 
       // do something with response
       this.setState({ post: response.data.post })
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  async componentDidUpdate () {
+    if (this.state.changedComments) {
+      try {
+        const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
+
+        // do something with response
+        this.setState({ post: response.data.post })
+        this.setState({ changedComments: false })
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 
@@ -36,6 +55,13 @@ class Post extends Component {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
+      .then(() => {
+        this.props.alert({
+          heading: 'Success!!!!!!',
+          message: 'You deleted a post.',
+          variant: 'success'
+        })
+      })
       .then(() => this.setState({ deleted: true }))
       .catch(console.error)
   }
@@ -54,6 +80,7 @@ class Post extends Component {
         }
       }/>
     } else if (post) {
+      console.log(this.state)
       updateAndDelete =
       <Fragment>
         <Button href={`#posts/${post._id}/edit`}>Update This Post</Button>
@@ -66,11 +93,14 @@ class Post extends Component {
           <Fragment>
             <h1>{post.title}</h1>
             <h2>{post.text}</h2>
-            {(this.props.user && post) && this.props.user._id === post.owner
+            {console.log('this is user', this.props.user)}
+            {console.log('this is post', post.owner)}
+            {(this.props.user && post) && this.props.user._id === post.owner._id
               ? updateAndDelete
               : ''
             }
-            <Comments user={user} alert={alert} post={post} />
+            <Comments user={user} alert={alert} post={post}
+              updatePostState={this.updatePostState} />
           </Fragment>
         )}
       </div>

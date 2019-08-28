@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -27,6 +27,7 @@ class Posts extends Component {
   }
 
   render () {
+    const { user } = this.props
     const postsJsx = this.state.posts.map(post => (
       <ListGroup.Item as="a" href={`#/posts/${post._id}`} key={post._id}>
         {post.title}
@@ -34,11 +35,18 @@ class Posts extends Component {
     ))
 
     return (
-      <ListGroup>
-        {this.state.posts.length ? postsJsx : <ListGroup.Item> No Posts Found</ListGroup.Item>}
-        { // this.state.posts.length && postsJsx}
-        }
-      </ListGroup>
+      <Fragment>
+        <div className="container text-right my-2">
+          { user &&
+              <button href="#/post-create" className="btn btn-primary">Create a Post</button>
+          }
+        </div>
+        <ListGroup>
+          {this.state.posts.length ? postsJsx : <ListGroup.Item> No Posts Found</ListGroup.Item>}
+          { // this.state.posts.length && postsJsx}
+          }
+        </ListGroup>
+      </Fragment>
     )
   }
 }

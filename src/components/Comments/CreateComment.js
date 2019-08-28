@@ -21,7 +21,6 @@ class CreateComment extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('these are props', this.props)
     axios({
       method: 'POST',
       url: `${apiUrl}/comments`,
