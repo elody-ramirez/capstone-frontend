@@ -13,6 +13,14 @@ class CreateComment extends Component {
     }
   }
 
+  resetForm = () => {
+    const comment = {
+      text: '',
+      post: this.props.post._id
+    }
+    this.setState({ comment })
+  }
+
   handleChange = event => {
     this.setState({
       comment: { ...this.state.comment, [event.target.name]: event.target.value }
@@ -38,6 +46,7 @@ class CreateComment extends Component {
           variant: 'success'
         })
         this.props.onCreate(response)
+        this.resetForm()
       })
       .catch(console.error)
   }

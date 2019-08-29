@@ -49,7 +49,7 @@ class Posts extends Component {
           <p className="col-2">created by: {post.owner.username}</p>
         </Row>
       </ListGroup.Item>
-    ))
+    )).reverse()
 
     return (
       <Container>
