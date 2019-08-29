@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import apiUrl from '../../apiConfig'
 
@@ -31,14 +32,16 @@ class Posts extends Component {
     const postsJsx = this.state.posts.map(post => (
       <ListGroup.Item as="a" href={`#/posts/${post._id}`} key={post._id}>
         {console.log(post.owner.username)}
-        <h3>{post.title}</h3>
-        <p>created by: {post.owner.username}</p>
-        <p>comment count: {post.comments.length}</p>
+        <Row>
+          <Col><p>comment count: {post.comments.length}</p></Col>
+          <Col><h3>{post.title}</h3></Col>
+          <Col><p>created by: {post.owner.username}</p></Col>
+        </Row>
       </ListGroup.Item>
     ))
 
     return (
-      <Fragment>
+      <Container>
         <div className="container text-right my-2">
           { user &&
             <Link to='/createpost'>
@@ -51,7 +54,7 @@ class Posts extends Component {
           { // this.state.posts.length && postsJsx}
           }
         </ListGroup>
-      </Fragment>
+      </Container>
     )
   }
 }
