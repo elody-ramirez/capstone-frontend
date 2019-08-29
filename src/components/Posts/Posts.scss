@@ -1,0 +1,9 @@
+a {
+  color: red;
+
+  &:hover {
+    color: black;
+    background-color: transparentize(red, .95);
+    text-decoration: none;
+  }
+}

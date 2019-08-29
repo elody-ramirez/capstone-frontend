@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
-import ListGroup from 'react-bootstrap/ListGroup'
-import { Container, Row, Col } from 'react-bootstrap'
 
+// React bootstrap
+import ListGroup from 'react-bootstrap/ListGroup'
+import { Container, Row } from 'react-bootstrap'
+
+// Url to development and production API
 import apiUrl from '../../apiConfig'
+
+// FontAwesome with React
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment } from '@fortawesome/free-solid-svg-icons'
+
+import './Posts.scss'
 
 class Posts extends Component {
   constructor () {
@@ -31,11 +40,13 @@ class Posts extends Component {
     const { user } = this.props
     const postsJsx = this.state.posts.map(post => (
       <ListGroup.Item as="a" href={`#/posts/${post._id}`} key={post._id}>
-        {console.log(post.owner.username)}
         <Row>
-          <Col><p>comment count: {post.comments.length}</p></Col>
-          <Col><h3>{post.title}</h3></Col>
-          <Col><p>created by: {post.owner.username}</p></Col>
+          <div className="col-2">
+            <FontAwesomeIcon icon={faComment} />
+            <p>{post.comments.length}</p>
+          </div>
+          <h3 className="col-8">{post.title}</h3>
+          <p className="col-2">created by: {post.owner.username}</p>
         </Row>
       </ListGroup.Item>
     ))

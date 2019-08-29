@@ -26,12 +26,12 @@ const Header = ({ user }) => (
   <Fragment>
     <Navbar bg="primary" variant="dark" expand="md">
       <Navbar.Brand href="#">
-        capstone-frontend
+        This Is Not Reddit
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
+          { user && <span className="navbar-text mr-2">Welcome, {user.username}</span>}
           { alwaysOptions }
           { user ? authenticatedOptions : unauthenticatedOptions }
         </Nav>
