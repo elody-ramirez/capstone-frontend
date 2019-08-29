@@ -1,23 +1,20 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
+import AuthenticatedRoute from '../User/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
-import Header from '../Header/Header'
+import Header from '../Common/Header'
 // User Components
-import SignUp from '../SignUp/SignUp'
-import SignIn from '../SignIn/SignIn'
-import SignOut from '../SignOut/SignOut'
-import ChangePassword from '../ChangePassword/ChangePassword'
+import SignUp from '../User/SignUp'
+import SignIn from '../User/SignIn'
+import SignOut from '../User/SignOut'
+import ChangePassword from '../User/ChangePassword'
 
-// import Home from '../Home/Home'
 // Post Components
 import Post from '../Posts/Post'
 import Posts from '../Posts/Posts'
 import CreatePost from '../Posts/CreatePost'
 import UpdatePost from '../Posts/UpdatePost'
-
-// Comment Compoenents
 
 class App extends Component {
   constructor () {
@@ -65,6 +62,7 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
 
+          {/* Routes for posts */}
           <Route exact path='/' render={() => (
             <Posts alert={this.alert} user={user} />
           )} />

@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 
+import Comments from '../Comments/Comments'
 import apiUrl from '../../apiConfig'
 
 class Post extends Component {
@@ -11,9 +12,12 @@ class Post extends Component {
 
     this.state = {
       post: null,
-      deleted: false
+      deleted: false,
+      changedComments: false
     }
   }
+
+  updatePostState = () => this.setState({ changedComments: true })
 
   async componentDidMount () {
     try {
@@ -21,10 +25,23 @@ class Post extends Component {
       const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
 
       // do something with response
-      console.log(response)
       this.setState({ post: response.data.post })
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  async componentDidUpdate () {
+    if (this.state.changedComments) {
+      try {
+        const response = await axios(`${apiUrl}/posts/${this.props.match.params.id}`)
+
+        // do something with response
+        this.setState({ post: response.data.post })
+        this.setState({ changedComments: false })
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 
@@ -36,12 +53,21 @@ class Post extends Component {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
+      .then(() => {
+        this.props.alert({
+          heading: 'Success!!!!!!',
+          message: 'You deleted a post.',
+          variant: 'success'
+        })
+      })
       .then(() => this.setState({ deleted: true }))
       .catch(console.error)
   }
 
   render () {
     const { post, deleted } = this.state
+    const { user, alert } = this.props
+
     let postJsx
     let updateAndDelete
 
@@ -63,11 +89,14 @@ class Post extends Component {
         { post && (
           <Fragment>
             <h1>{post.title}</h1>
-            <h2>{post.text}</h2>
-            {(this.props.user && post) && this.props.user._id === post.owner
+            <p>created by: {post.owner.username}</p>
+            <h3>{post.text}</h3>
+            {(this.props.user && post) && this.props.user._id === post.owner._id
               ? updateAndDelete
               : ''
             }
+            <Comments user={user} alert={alert} post={post}
+              updatePostState={this.updatePostState} />
           </Fragment>
         )}
       </div>
