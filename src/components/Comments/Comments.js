@@ -33,7 +33,7 @@ class Comments extends Component {
           message: 'You deleted a comment.',
           variant: 'success'
         })
-        this.props.updatePostState('deleted')
+        this.props.updatePostState()
       })
       .catch(console.error)
   }

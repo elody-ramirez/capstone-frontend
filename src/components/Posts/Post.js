@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 
+import messages from '../AutoDismissAlert/messages'
 import Comments from '../Comments/Comments'
 import apiUrl from '../../apiConfig'
 
@@ -27,7 +28,11 @@ class Post extends Component {
       // do something with response
       this.setState({ post: response.data.post })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'Error',
+        message: messages.indexPostFailure,
+        variant: 'danger'
+      })
     }
   }
 
@@ -40,7 +45,11 @@ class Post extends Component {
         this.setState({ post: response.data.post })
         this.setState({ changedComments: false })
       } catch (error) {
-        console.error(error)
+        this.props.alert({
+          heading: 'Error',
+          message: messages.indexPostFailure,
+          variant: 'danger'
+        })
       }
     }
   }
@@ -56,12 +65,16 @@ class Post extends Component {
       .then(() => {
         this.props.alert({
           heading: 'Success!!!!!!',
-          message: 'You deleted a post.',
+          message: messages.deletePostSuccess,
           variant: 'success'
         })
       })
       .then(() => this.setState({ deleted: true }))
-      .catch(console.error)
+      .catch(() => this.props.alert({
+        heading: 'Error',
+        message: messages.deletePostFailure,
+        variant: 'danger'
+      }))
   }
 
   render () {

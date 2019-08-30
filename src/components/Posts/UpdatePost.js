@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
+import messages from '../AutoDismissAlert/messages'
 import PostForm from './PostForm'
 
 class UpdatePost extends Component {
@@ -18,7 +19,7 @@ class UpdatePost extends Component {
       .then(response => this.setState({ post: response.data.post }))
       .catch(() => this.props.alert({
         heading: 'Error',
-        message: 'You failed',
+        message: messages.indexPostFailure,
         variant: 'danger'
       }))
   }
@@ -44,7 +45,7 @@ class UpdatePost extends Component {
       .then(response => {
         this.props.alert({
           heading: 'Success!!!!!!',
-          message: 'You updated a post.',
+          message: messages.editPostSuccess,
           variant: 'success'
         })
         this.props.history.push(`/posts/${this.state.post._id}`)

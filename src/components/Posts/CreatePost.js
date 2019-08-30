@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
+import messages from '../AutoDismissAlert/messages'
 import PostForm from './PostForm'
 
 class CreatePost extends Component {
@@ -34,7 +35,7 @@ class CreatePost extends Component {
       .then(response => {
         this.props.alert({
           heading: 'Success!!!!!!',
-          message: 'You created a post.',
+          message: messages.createPostSuccess,
           variant: 'success'
         })
         this.props.history.push(`/posts/${response.data.post._id}`)
