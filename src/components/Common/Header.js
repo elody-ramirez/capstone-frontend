@@ -26,7 +26,7 @@ const Header = ({ user }) => (
   <Fragment>
     <Navbar bg="primary" variant="dark" expand="md">
       <Navbar.Brand href="#">
-        This Is Not Reddit
+        !Reddit
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
