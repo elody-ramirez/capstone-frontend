@@ -9,7 +9,7 @@ const Comment = ({ comment, user, handleEdit, handleDelete }) => {
     <p>Created by:{comment.owner.username}</p>
     {user && user._id === comment.owner._id
       ? <Fragment>
-        <Button onClick={() => handleDelete(comment._id)}>
+        <Button variant="secondary" onClick={() => handleDelete(comment._id)}>
           Delete This Comment
         </Button>
       </Fragment>

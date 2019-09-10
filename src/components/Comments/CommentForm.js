@@ -16,7 +16,7 @@ const CommentForm = ({ comment, handleChange, handleSubmit }) => (
       />
     </Form.Group>
 
-    <Button variant="primary" type="submit">
+    <Button variant="secondary" type="submit">
       Submit
     </Button>
   </Form>

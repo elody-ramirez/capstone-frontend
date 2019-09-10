@@ -93,8 +93,12 @@ class Post extends Component {
     } else if (post) {
       updateAndDelete =
       <Fragment>
-        <Button href={`#posts/${post._id}/edit`}>Update This Post</Button>
-        <Button onClick={this.deletePost}>Delete This Post</Button>
+        <Button variant="secondary" href={`#posts/${post._id}/edit`}>
+          Update This Post
+        </Button>
+        <Button variant="secondary" onClick={this.deletePost}>
+          Delete This Post
+        </Button>
       </Fragment>
 
       postJsx =
