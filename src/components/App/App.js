@@ -9,6 +9,7 @@ import SignUp from '../User/SignUp'
 import SignIn from '../User/SignIn'
 import SignOut from '../User/SignOut'
 import ChangePassword from '../User/ChangePassword'
+import Guest from '../User/Guest'
 
 // Post Components
 import Post from '../Posts/Post'
@@ -60,6 +61,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+          <Route path='/guest' render={() => (
+            <Guest alert={this.alert} setUser={this.setUser} />
           )} />
 
           {/* Routes for posts */}

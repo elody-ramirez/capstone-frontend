@@ -56,7 +56,7 @@ class Posts extends Component {
         <div className="container text-right my-2">
           { user &&
             <Link to='/createpost'>
-              <button className="btn btn-primary">Create a Post</button>
+              <button className="btn btn-secondary">Create a Post</button>
             </Link>
           }
         </div>

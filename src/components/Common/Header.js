@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
+import './Header.scss'
+
 const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
@@ -13,6 +15,7 @@ const unauthenticatedOptions = (
   <Fragment>
     <Nav.Link href="#sign-up">Sign Up</Nav.Link>
     <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <Nav.Link href="#guest">Guest</Nav.Link>
   </Fragment>
 )
 
@@ -24,7 +27,7 @@ const alwaysOptions = (
 
 const Header = ({ user }) => (
   <Fragment>
-    <Navbar bg="primary" variant="dark" expand="md">
+    <Navbar bg="secondary" variant="dark" expand="md">
       <Navbar.Brand href="#">
         !Reddit
       </Navbar.Brand>
