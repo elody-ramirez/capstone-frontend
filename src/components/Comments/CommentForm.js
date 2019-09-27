@@ -15,10 +15,11 @@ const CommentForm = ({ comment, handleChange, handleSubmit }) => (
         required
       />
     </Form.Group>
-
-    <Button variant="secondary" type="submit">
-      Submit
-    </Button>
+    <div className="test2">
+      <Button variant="secondary" type="submit">
+        Submit
+      </Button>
+    </div>
   </Form>
 )
 

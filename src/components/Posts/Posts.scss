@@ -2,7 +2,6 @@ a {
   color: black;
 
   &:hover {
-    color: red;
     background-color: transparentize(red, .95);
     text-decoration: none;
   }

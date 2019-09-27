@@ -7,6 +7,8 @@ import Comment from './Comment'
 import CreateComment from './CreateComment'
 import apiUrl from '../../apiConfig'
 
+import './Comments.scss'
+
 class Comments extends Component {
   constructor (props) {
     super(props)
@@ -60,13 +62,15 @@ class Comments extends Component {
       <ListGroup>
         { user &&
           <ListGroup.Item>
-            <h2>Create a Comment here</h2>
-            <CreateComment
-              user={user}
-              post={post}
-              alert={alert}
-              onCreate={this.onCreate}
-            />
+            <div className='test'>
+              <h2>Create a Comment here</h2>
+              <CreateComment
+                user={user}
+                post={post}
+                alert={alert}
+                onCreate={this.onCreate}
+              />
+            </div>
           </ListGroup.Item>
         }
         <ListGroup.Item>

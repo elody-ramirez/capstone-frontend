@@ -45,7 +45,7 @@ class Posts extends Component {
             <FontAwesomeIcon icon={faComment} />
             <p>{post.comments.length}</p>
           </div>
-          <h3 className="col-8">{post.title}</h3>
+          <h4 className="col-8">{post.title}</h4>
           <p className="col-2">created by: {post.owner.username}</p>
         </Row>
       </ListGroup.Item>

@@ -2,10 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { Container } from 'react-bootstrap'
 
 import messages from '../AutoDismissAlert/messages'
 import Comments from '../Comments/Comments'
 import apiUrl from '../../apiConfig'
+
+import './Post.scss'
 
 class Post extends Component {
   constructor () {
@@ -105,13 +109,14 @@ class Post extends Component {
       <div>
         { post && (
           <Fragment>
-            <h1>{post.title}</h1>
+            <h4>{post.title}</h4>
             <p>created by: {post.owner.username}</p>
-            <h3>{post.text}</h3>
+            <h4>{post.text}</h4>
             {(this.props.user && post) && this.props.user._id === post.owner._id
               ? updateAndDelete
               : ''
             }
+            <p className="mt-3">{post.comments.length} Comments</p>
             <Comments user={user} alert={alert} post={post}
               updatePostState={this.updatePostState} />
           </Fragment>
@@ -124,7 +129,15 @@ class Post extends Component {
     }
 
     return (
-      <div>{postJsx}</div>
+      <Container>
+        <div className="container my-2">
+          <ListGroup>
+            <ListGroup.Item>
+              <div>{postJsx}</div>
+            </ListGroup.Item>
+          </ListGroup>
+        </div>
+      </Container>
     )
   }
 }
