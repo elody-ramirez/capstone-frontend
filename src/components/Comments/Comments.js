@@ -51,7 +51,7 @@ class Comments extends Component {
             user={user} alert={alert} comment={comment} post={post} handleDelete={this.handleDelete}
           />
         </ListGroup.Item>
-      ))
+      )).reverse()
     } else {
       commentsJsx = 'No Comments, Be The First'
     }

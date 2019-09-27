@@ -1,8 +1,8 @@
 a {
-  color: red;
+  color: black;
 
   &:hover {
-    color: black;
+    color: red;
     background-color: transparentize(red, .95);
     text-decoration: none;
   }
